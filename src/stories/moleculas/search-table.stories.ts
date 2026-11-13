@@ -22,7 +22,7 @@ const normalize = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-�
 const filter = (q: string) => (q ? rows.filter(r => Object.values(r).some(v => normalize(String(v)).includes(normalize(q)))) : rows);
 
 const meta: Meta<RamaSearchTable> = {
-  title: 'Organismos/Search table',
+  title: 'Moléculas/Search table',
   component: RamaSearchTable,
   decorators: [moduleMetadata({ imports: [RamaSearchTable, RamaTable] })],
   parameters: { layout: 'padded' },

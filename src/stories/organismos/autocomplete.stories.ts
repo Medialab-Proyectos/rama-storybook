@@ -12,7 +12,7 @@ const puestos: DropdownOption[] = [
 type Args = RamaAutocomplete & { valor: string | string[] | null };
 
 const meta: Meta<Args> = {
-  title: 'Moléculas/Autocomplete',
+  title: 'Organismos/Autocomplete',
   component: RamaAutocomplete,
   decorators: [moduleMetadata({ imports: [RamaAutocomplete, FormsModule] })],
   parameters: { layout: 'padded' },

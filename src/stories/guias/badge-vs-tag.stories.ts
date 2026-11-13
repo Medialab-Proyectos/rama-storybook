@@ -6,7 +6,7 @@ import { RamaTag } from '../../lib/tag/tag.component';
 
 /** Guía de uso de la página "Tag" de Figma (Rama (3)): "Badge vs. Tag: Diferencie". */
 const meta: Meta = {
-  title: 'Átomos/Badge vs Tag',
+  title: 'Guías/Badge vs Tag',
   decorators: [moduleMetadata({ imports: [RamaBadge, RamaTag, RamaIcon] })],
   parameters: { layout: 'padded', controls: { disable: true } },
 };

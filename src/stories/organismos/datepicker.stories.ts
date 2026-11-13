@@ -7,7 +7,7 @@ import { RamaDatepicker } from '../../lib/calendar/datepicker.component';
 const today = new Date(2025, 4, 17);
 
 const meta: Meta = {
-  title: 'Moléculas/Datepicker',
+  title: 'Organismos/Datepicker',
   decorators: [moduleMetadata({ imports: [RamaCalendar, RamaDatepicker] })],
   parameters: { layout: 'padded' },
 };

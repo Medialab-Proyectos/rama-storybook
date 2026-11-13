@@ -21,11 +21,14 @@ El Storybook se ordena de lo más simple a lo más compuesto:
 | Nivel | Qué contiene | Componentes |
 |---|---|---|
 | **Fundamentos** | Los tokens: las decisiones de diseño que no son componentes. | Colores, Tipografía, Íconos, Sombras y desenfoques, Espacios, grillas y bordes |
-| **Átomos** | Las piezas mínimas de interfaz; no se pueden dividir sin perder su función. | Button, Badge, Tag, Badge vs Tag (guía de uso), Avatar, Checkbox y Radio, Input y Text area |
-| **Moléculas** | Grupos pequeños de átomos que cumplen una sola tarea. | Button group, Breadcrumb, Tabs, Dropdown list, Search input, Autocomplete, Datepicker, Alert, Card, Uploader button |
-| **Organismos** | Secciones completas de interfaz que combinan moléculas y átomos. | Menú y Sidebar, Table, Search table, Calendar, Modal y Pop up, Panel lateral, Uploader de documentos, Uploader card |
+| **Átomos** | Las piezas mínimas de interfaz; no se pueden dividir sin perder su función. | Button, Badge, Tag, Avatar, Label, Checkbox y Radio, Table button, Porcentaje |
+| **Moléculas** | Grupos pequeños de átomos que cumplen una sola tarea. | Input y Text area (label + caja + ayuda), Button group, Breadcrumb, Tabs, Search table, Dropdown list, Calendar, Alert, Card, File state, Uploader button |
+| **Organismos** | Secciones completas de interfaz que combinan moléculas y átomos. | Menú y Sidebar, Formulario, Autocomplete, Search input, Datepicker, Table, Modal y Pop up, Panel lateral, Uploader card, Uploader de documentos |
 | **Plantillas** | Estructuras de pantalla con los organismos ubicados, sin contenido real. | Por construir (p. ej. Home de Figma) |
 | **Páginas** | Plantillas con contenido real de un producto. | Por construir |
+| **Guías** | Pautas de uso que comparan o explican componentes; no son componentes. | Badge vs Tag |
+
+**Regla del sistema:** un componente solo puede contener piezas de su mismo nivel o de niveles inferiores (p. ej. el Datepicker es organismo porque contiene el Calendar, que es molécula).
 
 Cada historia indica en su componente la página de Figma de la que sale (archivo **Rama (3)**). El código vive en `src/lib/` y las historias en `src/stories/<nivel>/`.
 

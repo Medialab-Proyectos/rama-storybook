@@ -32,16 +32,18 @@ const preview: Preview = {
       },
     },
     options: {
-      // Atomic Design: Introducción → Fundamentos (tokens) → Átomos → Moléculas → Organismos → Plantillas → Páginas.
+      // Atomic Design: Introducción → Fundamentos (tokens) → Átomos → Moléculas → Organismos → Plantillas → Páginas → Guías.
+      // Regla: un componente solo contiene piezas de su nivel o de niveles inferiores.
       // Dentro de cada nivel, el orden de ORDER (de lo más simple a lo más compuesto); luego, el orden de las historias.
       // @ts-ignore -- Storybook evalúa esta función como JavaScript plano: no admite anotaciones de tipo.
       storySort: (a, b) => {
-        const LEVELS = ['Introducción', 'Fundamentos', 'Átomos', 'Moléculas', 'Organismos', 'Plantillas', 'Páginas'];
+        const LEVELS = ['Introducción', 'Fundamentos', 'Átomos', 'Moléculas', 'Organismos', 'Plantillas', 'Páginas', 'Guías'];
         const ORDER = [
           'Colores', 'Tipografía', 'Íconos', 'Sombras y desenfoques', 'Espacios, grillas y bordes',
-          'Button', 'Badge', 'Tag', 'Badge vs Tag', 'Avatar', 'Checkbox y Radio', 'Input y Text area',
-          'Button group', 'Breadcrumb', 'Tabs', 'Dropdown list', 'Search input', 'Autocomplete', 'Datepicker', 'Alert', 'Card', 'Uploader button',
-          'Menú y Sidebar', 'Menú y Sidebar · versión actual', 'Formulario', 'Table', 'Search table', 'Calendar', 'Modal y Pop up', 'Panel lateral', 'Uploader de documentos', 'Uploader card',
+          'Button', 'Badge', 'Tag', 'Avatar', 'Label', 'Checkbox y Radio', 'Table button', 'Porcentaje',
+          'Input y Text area', 'Button group', 'Breadcrumb', 'Tabs', 'Search table', 'Dropdown list', 'Calendar', 'Alert', 'Card', 'File state', 'Uploader button',
+          'Menú y Sidebar', 'Menú y Sidebar · versión actual', 'Formulario', 'Autocomplete', 'Search input', 'Datepicker', 'Table', 'Modal y Pop up', 'Panel lateral', 'Uploader card', 'Uploader de documentos',
+          'Badge vs Tag',
         ];
         const [la, na] = a.title.split('/');
         const [lb, nb] = b.title.split('/');

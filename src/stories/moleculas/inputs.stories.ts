@@ -9,7 +9,7 @@ import { RamaButton } from '../../lib/button/button.component';
 type Args = RamaInput & { valor: string };
 
 const meta: Meta<Args> = {
-  title: 'Átomos/Input y Text area',
+  title: 'Moléculas/Input y Text area',
   component: RamaInput,
   decorators: [moduleMetadata({ imports: [RamaInput, RamaTextarea, RamaLabel, RamaButton, FormsModule] })],
   parameters: { layout: 'padded' },
@@ -144,28 +144,6 @@ export const Tamanos: StoryObj<Args> = {
           <div><rama-input size="small" label="Error" placeholder="example@gmail.com" error="Campo obligatorio" [required]="true" /></div>
           <div><code>Text area · Medium</code><br><br><rama-textarea label="Observaciones" placeholder="Enter a description..." helper="Support text" [maxLength]="300" [required]="true" /></div>
           <div><code>Text area · Small</code><br><br><rama-textarea size="small" label="Observaciones" placeholder="Enter a description..." helper="Support text" [maxLength]="300" [required]="true" /></div>
-        </div>
-      </div>`,
-  }),
-};
-
-export const Etiqueta: StoryObj<Args> = {
-  name: 'Label',
-  render: () => ({
-    template: `
-      <div class="sb-doc">
-        <p class="sb-lead">Figma 13 Inputs · <code>Label</code>: Size=Medium (14/16 bold) o Small (12/16 semibold) × Color=Primary, Secondary o Disabled. En los campos se controla con <code>labelColor</code> (Disabled sale solo del estado y dentro de <code>rama-form</code> se usa Secondary); <code>rama-label</code> sirve para rotular controles sin etiqueta propia.</p>
-        <div style="display:grid;grid-template-columns:repeat(3,max-content);gap:16px 48px;align-items:center">
-          <rama-label [required]="true" tooltip="Información adicional">Primary</rama-label>
-          <rama-label color="secondary" [required]="true" tooltip="Información adicional">Secondary</rama-label>
-          <rama-label color="disabled" [required]="true" tooltip="Información adicional">Disabled</rama-label>
-          <rama-label size="small" [required]="true" tooltip="Información adicional">Primary</rama-label>
-          <rama-label size="small" color="secondary" [required]="true" tooltip="Información adicional">Secondary</rama-label>
-          <rama-label size="small" color="disabled" [required]="true" tooltip="Información adicional">Disabled</rama-label>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;max-width:800px;margin-top:32px">
-          <rama-input size="small" label="Cargo del responsable" labelColor="primary" placeholder="Supervisor de estación" />
-          <rama-input size="small" label="Cargo del responsable" labelColor="secondary" placeholder="Supervisor de estación" />
         </div>
       </div>`,
   }),

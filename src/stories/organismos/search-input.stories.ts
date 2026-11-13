@@ -45,7 +45,7 @@ const arbol: SearchTreeNode[] = [
 type Args = RamaSearchInput & { valor: string | string[] | null };
 
 const meta: Meta<Args> = {
-  title: 'Moléculas/Search input',
+  title: 'Organismos/Search input',
   component: RamaSearchInput,
   decorators: [moduleMetadata({ imports: [RamaSearchInput, FormsModule] })],
   parameters: { layout: 'padded' },
