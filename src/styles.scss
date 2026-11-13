@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+@import './styles/tokens.css';
+@import './styles/typography.css';
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  font-family: var(--rama-font);
+  color: var(--rama-text-default-black);
+  background: var(--rama-bg-default-white);
+}
+button, input, select, textarea { font-family: inherit; }
+:focus-visible { outline: 2px solid var(--rama-primary-400); outline-offset: 2px; }

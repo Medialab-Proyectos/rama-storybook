@@ -1,0 +1,36 @@
+/* Estilos de texto Rama (variante letter-spacing 0%). El peso se combina con .rama-w-*. */
+.rama-h1 { font: 400 84px/92px var(--rama-font); }
+.rama-h2 { font: 400 72px/76px var(--rama-font); }
+.rama-h3 { font: 400 60px/68px var(--rama-font); }
+.rama-h4 { font: 400 48px/52px var(--rama-font); }
+.rama-s1 { font: 400 36px/40px var(--rama-font); }
+.rama-s2 { font: 400 30px/36px var(--rama-font); }
+.rama-b1 { font: 400 24px/28.8px var(--rama-font); }
+.rama-overline { font: 400 20px/24px var(--rama-font); }
+.rama-btn1 { font: 400 18px/28px var(--rama-font); }
+.rama-b2 { font: 400 16px/20px var(--rama-font); }
+.rama-btn2 { font: 400 14px/16px var(--rama-font); }
+.rama-c1 { font: 400 12px/16px var(--rama-font); }
+.rama-c2 { font: 400 10px/12px var(--rama-font); }
+
+.rama-w-light { font-weight: var(--rama-weight-light); }
+.rama-w-regular { font-weight: var(--rama-weight-regular); }
+.rama-w-medium { font-weight: var(--rama-weight-medium); }
+.rama-w-semibold { font-weight: var(--rama-weight-semibold); }
+.rama-w-bold { font-weight: var(--rama-weight-bold); }
+
+@media (max-width: 440px) {
+  .rama-h1 { font-size: 44px; line-height: 52px; }
+  .rama-h2 { font-size: 40px; line-height: 48px; }
+  .rama-h3 { font-size: 32px; line-height: 40px; }
+  .rama-h4 { font-size: 28px; line-height: 36px; }
+  .rama-s1 { font-size: 28px; line-height: 32px; }
+  .rama-s2 { font-size: 24px; line-height: 28px; }
+  .rama-b1 { font-size: 20px; line-height: 24px; }
+  .rama-overline { font-size: 16px; line-height: 20px; }
+  .rama-btn1 { font-size: 16px; line-height: 24px; }
+  .rama-b2 { font-size: 16px; line-height: 20px; }
+  .rama-btn2 { font-size: 14px; line-height: 16px; }
+  .rama-c1 { font-size: 12px; line-height: 16px; }
+  .rama-c2 { font-size: 10px; line-height: 12px; }
+}
