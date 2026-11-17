@@ -222,15 +222,6 @@ function entregaStory(initial: Entrega[], mobile = false) {
                   <h3 id="etr-detail-h" tabindex="-1">Entrega de turno por revisar</h3>
                   <rama-badge [type]="estados[e.estado]">{{ e.estado }}</rama-badge>
                 </div>
-                <!-- Resumen del turno (igual que resumenTurnoHtml() del wireframe): solo datos del tablero del rol. -->
-                <rama-panel-section title="Resumen del turno">
-                  <div class="grid2">
-                    <rama-panel-field label="Violaciones VOI">5 · 3 estándar · 2 críticas</rama-panel-field>
-                    <rama-panel-field label="Equipos no disponibles">2 · 1 FS · 1 MT de 12</rama-panel-field>
-                    <rama-panel-field label="Rondas completadas">3 de 4 · 1 cortada</rama-panel-field>
-                    <rama-panel-field label="NCR abiertos">2</rama-panel-field>
-                  </div>
-                </rama-panel-section>
                 <rama-panel-section title="Datos de la entrega">
                   <div class="grid2">
                     <rama-panel-field label="Área organizativa">{{ e.area }}</rama-panel-field>

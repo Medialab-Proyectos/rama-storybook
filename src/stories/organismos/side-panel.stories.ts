@@ -221,7 +221,7 @@ const RESPONSABILIDADES: Responsabilidad[] = [
       { id: 'f4', titulo: 'Fuga en sello del Compresor K-102 · Área 3.1', detalle: 'Goteo · Gas', estado: 'Controlada' },
     ] },
   { id: 'entrega', nombre: 'Entrega de turno por documentar', resumen: 'Turno A · Sección Crudos EC2', pendientes: 2, badge: 'warning', ancho: 'm',
-    contexto: 'Resumen del turno: 2 violaciones VOI · 1 equipo no disponible · 5 de 6 rondas completadas · 1 NCR abierto.',
+    contexto: '',
     registros: [
       { id: 'e1', titulo: 'Entrega Turno A · Operador Área 3.2', detalle: 'Ronda Sección Crudos EC2 – Turno A', estado: 'Por documentar' },
       { id: 'e2', titulo: 'Entrega Turno A · Operador Área 3.1', detalle: 'Ronda Área 3.1 – Turno A', estado: 'Por documentar' },
@@ -284,7 +284,7 @@ function crearEstado() {
 /** Contenido de los dos niveles (listado → documento) y footer, para la historia del patrón. */
 const NIVELES = `
   @if (sel(); as r) {
-    <rama-alert variant="compact" state="information" [dismissible]="false" title="Contexto del dashboard">{{ r.contexto }}</rama-alert>
+    @if (r.contexto) { <rama-alert variant="compact" state="information" [dismissible]="false" title="Contexto del dashboard">{{ r.contexto }}</rama-alert> }
     @if (nivel() === 1) {
       <rama-table [columns]="cols" [rows]="r.registros" [actions]="['primary']" [actionLabels]="{ primary: 'Abrir registro' }"
         [caption]="r.nombre" (action)="verRegistro($event.row)" />
@@ -403,7 +403,7 @@ export const AnchosSML: StoryObj<RamaSidePanel> = {
             <rama-panel-field label="Registro">Fuga en válvula V-301 · Área 3.2</rama-panel-field>
           </rama-side-panel>
           <rama-side-panel mode="inline" size="small" panelWidth="l" [open]="true" [closable]="false" title="L · Entrega de turno por documentar" description="Entrega de turno y bandejas (lista + detalle).">
-            <rama-panel-field label="Resumen del turno">2 violaciones VOI · 1 equipo no disponible · 5 de 6 rondas completadas</rama-panel-field>
+            <rama-panel-field label="Puesto de trabajo">Operador-Seccion Crudos EC2 · Turno A8 06-14</rama-panel-field>
           </rama-side-panel>
         </div>
         <rama-side-panel mode="docked" [(open)]="open" [panelWidth]="ancho()" [expandable]="true" [(expanded)]="ampliado"
