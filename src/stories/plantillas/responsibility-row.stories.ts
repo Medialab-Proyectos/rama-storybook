@@ -6,11 +6,12 @@ import { RamaButton } from '../../lib/button/button.component';
 import { RamaIcon } from '../../lib/icon/icon.component';
 import { RamaPanelField } from '../../lib/side-panel/panel-field.component';
 import { RamaPanelSection } from '../../lib/side-panel/panel-section.component';
+import { RamaSidePanel } from '../../lib/side-panel/side-panel.component';
 
 /**
  * Plantilla "Mis responsabilidades": filas del dashboard REVO armadas con componentes existentes de Rama:
- * rama-icon (ícono de la fila y chevron), rama-badge (estado), rama-button (acción rápida "Marcar como leída",
- * "Continuar ronda") y, para "Directrices por leer", expansión en línea con rama-panel-section (acordeón por
+ * rama-icon (ícono de la fila y chevron), rama-badge (estado), rama-button (acción rápida "Continuar ronda"),
+ * "Ver directriz" (abre la directriz en rama-side-panel docked de 720px, donde está "Marcar como leída") y, para "Directrices por leer", expansión en línea con rama-panel-section (acordeón por
  * directriz) + rama-panel-field (Mi puesto de trabajo, Directriz por leer, Directriz dada por, Fecha).
  * Filas, textos y estados copiados del wireframe (role.misResponsabilidades.resumen de Supervisor y Operador
  * y renderDirectricesList).
@@ -21,7 +22,7 @@ import { RamaPanelSection } from '../../lib/side-panel/panel-section.component';
  */
 const meta: Meta = {
   title: 'Plantillas/Mis responsabilidades',
-  decorators: [moduleMetadata({ imports: [RamaIcon, RamaBadge, RamaButton, RamaPanelSection, RamaPanelField] })],
+  decorators: [moduleMetadata({ imports: [RamaIcon, RamaBadge, RamaButton, RamaPanelSection, RamaPanelField, RamaSidePanel] })],
   parameters: { layout: 'padded' },
 };
 export default meta;
@@ -61,6 +62,9 @@ const STYLES = `
   .dir-txt { margin: 0; font-size: 14px; line-height: 20px; color: var(--rama-text-default-black); }
   .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--rama-space-10) var(--rama-space-16); }
   .dir-foot { display: flex; justify-content: flex-end; }
+  .dir-row { display: flex; align-items: center; gap: var(--rama-space-12); padding: var(--rama-space-8) 0; border-top: var(--rama-border-width-thin) solid var(--rama-border-default); }
+  .dir-row:first-child { border-top: 0; }
+  .dir-body { display: flex; flex-direction: column; gap: var(--rama-space-16); }
   .states { display: flex; flex-direction: column; gap: var(--rama-space-16); }
   .states > div > p { margin: 0 0 var(--rama-space-4); font: var(--rama-weight-semibold) 12px/16px var(--rama-font); color: var(--rama-text-muted); }
   .status { margin: var(--rama-space-12) 0 0; font-size: 12px; line-height: 16px; color: var(--rama-text-muted); }
@@ -134,18 +138,10 @@ const ROW = (extra = '') => `
     @if (r.expandable && expanded() === r.key) {
       <div class="rr-exp" [id]="'rr-exp-' + r.key" role="region" [attr.aria-labelledby]="'rr-' + r.key">
         @for (d of directrices(); track d.id) {
-          <rama-panel-section type="accordion" [title]="d.titulo" [counter]="d.leida ? '(Leído)' : '(No leído)'" [expanded]="!d.leida">
-            <p class="dir-txt">{{ d.texto }}</p>
-            <div class="grid2">
-              <rama-panel-field label="Mi puesto de trabajo">{{ d.puesto }}</rama-panel-field>
-              <rama-panel-field label="Directriz por leer">{{ d.puestoCoord }}</rama-panel-field>
-              <rama-panel-field label="Directriz dada por">{{ d.autor }}</rama-panel-field>
-              <rama-panel-field label="Fecha">{{ d.fecha }}</rama-panel-field>
-            </div>
-            @if (!d.leida) {
-              <div class="dir-foot"><rama-button size="small" leadIcon="check" (click)="leer(d.id)">Marcar como leída</rama-button></div>
-            }
-          </rama-panel-section>
+          <div class="dir-row">
+            <span class="rr-txt"><span class="rr-t">{{ d.titulo }}</span><span class="rr-m">{{ d.leida ? 'Leída' : 'No leída' }} · {{ d.autor }}</span></span>
+            <rama-button variant="outlined" size="xs" (click)="ver(d.id)">Ver directriz</rama-button>
+          </div>
         }
       </div>
     }
@@ -156,6 +152,9 @@ function state(rows: Row[], dirs: Directriz[], opts: { sel?: string; expanded?: 
   const expanded = signal<string | null>(opts.expanded ?? null);
   const directrices = signal(dirs.map(d => ({ ...d })));
   const status = signal('');
+  const verId = signal<string | null>(null);
+  const dirIdx = computed(() => directrices().findIndex(d => d.id === verId()));
+  const dirActual = computed(() => directrices()[dirIdx()] ?? null);
   const leidas = computed(() => directrices().filter(d => d.leida).length);
   /** Directrices por leer: el badge pasa a "Completado" (success) cuando todas están leídas, como en el wireframe. */
   const estado = (r: Row) => r.expandable
@@ -163,7 +162,10 @@ function state(rows: Row[], dirs: Directriz[], opts: { sel?: string; expanded?: 
     : { badge: r.badge, cls: r.cls };
   const meta = (r: Row) => r.expandable ? `${leidas()} de ${directrices().length} directrices leídas` : r.s ?? '';
   return {
-    rows, sel, expanded, directrices, status, estado, meta,
+    rows, sel, expanded, directrices, status, estado, meta, verId, dirIdx, dirActual,
+    ver: (id: string) => { verId.set(id); sel.set('directrices'); },
+    cerrarDir: () => { verId.set(null); sel.set(null); },
+    mover: (d: number) => { const ds = directrices(); const i = dirIdx() + d; if (ds[i]) verId.set(ds[i].id); },
     abrir: (r: Row) => {
       if (r.expandable) { expanded.update(k => (k === r.key ? null : r.key)); return; }
       sel.set(r.key);
@@ -183,6 +185,24 @@ const LIST = (title: string, sub: string) => `
       </ul>
     </div>
     <p class="status" role="status">{{ status() }}</p>
+    <rama-side-panel mode="docked" panelWidth="m" [open]="!!dirActual()" (closed)="cerrarDir()" [title]="dirActual()?.titulo ?? ''"
+      backLabel="Directrices por leer" (back)="cerrarDir()" [showPager]="true" [hasPrev]="dirIdx() > 0" [hasNext]="dirIdx() < directrices().length - 1"
+      [pagerText]="(dirIdx() + 1) + ' de ' + directrices().length" (prev)="mover(-1)" (next)="mover(1)">
+      @if (dirActual(); as d) {
+        <div class="dir-body">
+          <p class="dir-txt">{{ d.texto }}</p>
+          <div class="grid2">
+            <rama-panel-field label="Mi puesto de trabajo">{{ d.puesto }}</rama-panel-field>
+            <rama-panel-field label="Directriz por leer">{{ d.puestoCoord }}</rama-panel-field>
+            <rama-panel-field label="Directriz dada por">{{ d.autor }}</rama-panel-field>
+            <rama-panel-field label="Fecha">{{ d.fecha }}</rama-panel-field>
+          </div>
+        </div>
+        <ng-container ngProjectAs="[panel-footer]">
+          @if (!d.leida) { <rama-button size="large" leadIcon="check" (click)="leer(d.id)">Marcar como leída</rama-button> }
+        </ng-container>
+      }
+    </rama-side-panel>
   </div>`;
 
 export const Operador: Story = {
