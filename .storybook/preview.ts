@@ -43,6 +43,7 @@ const preview: Preview = {
           'Button', 'Badge', 'Tag', 'Avatar', 'Label', 'Checkbox y Radio', 'Table button', 'Porcentaje',
           'Input y Text area', 'Button group', 'Breadcrumb', 'Tabs', 'Search table', 'Dropdown list', 'Calendar', 'Alert', 'Card', 'File state', 'Uploader button',
           'Menú y Sidebar', 'Menú y Sidebar · versión actual', 'Formulario', 'Autocomplete', 'Search input', 'Datepicker', 'Table', 'Modal y Pop up', 'Panel lateral', 'Uploader card', 'Uploader de documentos',
+          'Mis responsabilidades', 'Barra de filtros', 'Bandeja',
           'Badge vs Tag',
         ];
         const [la, na] = a.title.split('/');

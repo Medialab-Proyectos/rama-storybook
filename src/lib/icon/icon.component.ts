@@ -1,6 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { icons } from './icons';
+import { loadRamaIcon, ramaIcons } from './icon-loader';
+
+// Nombres que no existen ni en el set core ni en el set completo de Figma (se muestra 'dot').
+const unknown = signal<ReadonlySet<string>>(new Set());
 
 @Component({
   selector: 'rama-icon',
@@ -18,10 +22,23 @@ export class RamaIcon {
   readonly strokeWidth = input(1.6);
   readonly label = input<string>();
 
-  private readonly raw = computed(() => icons[this.name()] ?? icons['dot']);
+  // Core (síncrono) → set completo de Figma (perezoso, por categoría) → 'dot' si no existe.
+  // Mientras se descarga el chunk de un ícono del set completo se dibuja un svg vacío del mismo tamaño.
+  private readonly raw = computed(() => {
+    const n = this.name();
+    return icons[n] ?? ramaIcons()[n] ?? (unknown().has(n) ? icons['dot'] : '');
+  });
   // Los SVG exportados de Figma (Iconsax) vienen dibujados con relleno; los provisionales, con trazo.
   readonly fromFigma = computed(() => this.raw().startsWith('<!--viewBox:'));
   readonly viewBox = computed(() => this.raw().match(/^<!--viewBox:([^>]+)-->/)?.[1] ?? '0 0 16 16');
   // Registro interno y estático (no entrada de usuario): es seguro marcarlo como confiable.
   readonly body = computed(() => this.sanitizer.bypassSecurityTrustHtml(this.raw()));
+
+  constructor() {
+    effect(() => {
+      const n = this.name();
+      if (icons[n] || ramaIcons()[n] || unknown().has(n)) return;
+      loadRamaIcon(n).then(ok => { if (!ok) unknown.update(s => new Set(s).add(n)); }, () => unknown.update(s => new Set(s).add(n)));
+    });
+  }
 }

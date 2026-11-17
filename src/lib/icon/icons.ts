@@ -1,6 +1,7 @@
 // Set provisional tomado del wireframe REVO (viewBox 16, trazo currentColor).
 // Para usar los íconos reales de Figma: exportarlos como SVG a public/icons/ y correr
 // `npm run icons`, que regenera icons.generated.ts y los mezcla sobre este set.
+// El set completo de Figma (public/icons/rama/**) no está aquí: lo carga icon-loader.ts bajo demanda.
 import { generatedIcons } from './icons.generated';
 
 const base: Record<string, string> = {
