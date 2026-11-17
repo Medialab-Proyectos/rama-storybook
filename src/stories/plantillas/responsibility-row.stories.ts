@@ -186,8 +186,7 @@ const LIST = (title: string, sub: string) => `
     </div>
     <p class="status" role="status">{{ status() }}</p>
     <rama-side-panel mode="docked" panelWidth="m" [open]="!!dirActual()" (closed)="cerrarDir()" [title]="dirActual()?.titulo ?? ''"
-      backLabel="Directrices por leer" (back)="cerrarDir()" [showPager]="true" [hasPrev]="dirIdx() > 0" [hasNext]="dirIdx() < directrices().length - 1"
-      [pagerText]="(dirIdx() + 1) + ' de ' + directrices().length" (prev)="mover(-1)" (next)="mover(1)">
+      backLabel="Directrices por leer" (back)="cerrarDir()">
       @if (dirActual(); as d) {
         <div class="dir-body">
           <p class="dir-txt">{{ d.texto }}</p>

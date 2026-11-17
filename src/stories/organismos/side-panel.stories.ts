@@ -373,7 +373,7 @@ export const JuntoAlDashboard: StoryObj<RamaSidePanel> = {
         [returnFocus]="fila()" (dockedWidth)="reserva.set($event)" (closed)="cerrado()"
         [title]="nivel() === 2 ? (registro()?.titulo ?? '') : (sel()?.nombre ?? '')"
         [backLabel]="nivel() === 2 ? sel()?.nombre : undefined" (back)="volver()"
-        [showPager]="nivel() === 2" [hasPrev]="idx() > 0" [hasNext]="idx() < (sel()?.registros?.length ?? 1) - 1"
+        [showPager]="false"
         [pagerText]="(idx() + 1) + ' de ' + (sel()?.registros?.length ?? 0)" (prev)="mover(-1)" (next)="mover(1)">
         ${NIVELES}
       </rama-side-panel>
@@ -416,7 +416,7 @@ export const AnchosSML: StoryObj<RamaSidePanel> = {
 
 export const EncabezadoNavegacion: StoryObj<RamaSidePanel> = {
   name: 'Encabezado con Volver y anterior/siguiente',
-  parameters: { docs: { description: { story: 'Navegación interna de máximo 2 niveles, sin miga de pan. **Nivel 1** (listado): título de la responsabilidad + ⤢ Ampliar + ✕. **Nivel 2** (documento): `backLabel` muestra "← {listado}" (emite `back`), `showPager` muestra ‹ › (emiten `prev`/`next`, deshabilitados con `hasPrev`/`hasNext`) y `pagerText` el "n de N". Botones con hover `bg-subtle`, foco `--rama-focus-ring` y deshabilitado `text-disabled` (no están en Figma).' } } },
+  parameters: { docs: { description: { story: '**En REVO no se usan las flechas anterior/siguiente** (`showPager` apagado en todas las responsabilidades); esta historia solo documenta la opción del componente. Navegación interna de máximo 2 niveles, sin miga de pan. **Nivel 1** (listado): título de la responsabilidad + ⤢ Ampliar + ✕. **Nivel 2** (documento): `backLabel` muestra "← {listado}" (emite `back`), `showPager` muestra ‹ › (emiten `prev`/`next`, deshabilitados con `hasPrev`/`hasNext`) y `pagerText` el "n de N". Botones con hover `bg-subtle`, foco `--rama-focus-ring` y deshabilitado `text-disabled` (no están en Figma).' } } },
   render: () => {
     const fugas = RESPONSABILIDADES[0].registros;
     return {
