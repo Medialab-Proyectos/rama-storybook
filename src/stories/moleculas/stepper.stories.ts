@@ -52,9 +52,9 @@ export const Asistente: StoryObj<RamaStepper> = {
         <p style="margin:0;font:var(--rama-weight-regular) 14px/16px var(--rama-font);color:var(--rama-text-muted)">{{ subtitulos[paso] }}</p>
         <rama-stepper [steps]="steps" [(current)]="paso" ariaLabel="Pasos para iniciar la sesión" />
         <div style="display:flex;gap:16px;align-items:center">
-          @if (paso > 0) { <rama-button variant="ghost" size="small" leadIcon="arrow-left" (click)="paso = paso - 1">Atrás</rama-button> }
+          @if (paso > 0) { <rama-button variant="ghost" size="large" (click)="paso = paso - 1">Atrás</rama-button> }
           <span style="flex:1"></span>
-          <rama-button variant="filled" size="large" [trailIcon]="paso < 2 ? 'arrow-right' : undefined" (click)="paso = paso < 2 ? paso + 1 : paso">{{ paso < 2 ? 'Siguiente' : 'Iniciar sesión' }}</rama-button>
+          <rama-button variant="filled" size="large" (click)="paso = paso < 2 ? paso + 1 : paso">{{ paso < 2 ? 'Siguiente' : 'Iniciar sesión' }}</rama-button>
         </div>
       </div>`,
   }),
